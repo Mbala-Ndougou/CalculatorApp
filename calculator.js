@@ -1,27 +1,30 @@
-const add = function(num1, num2){
-    return num1 + num2
-}
-
-const substract = function(num1, num2){
-    return num1 - num2
-}
-
-const multiply = function(num1, num2){
-    return num1 * num2
-}
-
-const divide = function(num1, num2){
-    return num1 / num2
-}
-
-const power = function(num1,num2){
-    return num1 ** num2;
-}
-
-
 let firstNumber = 0;
 let secondNumber = 0;
 let operator = "";
+let result = 0
+
+
+const add = function(num1, num2){
+    result =  num1 + num2
+    return result;
+}
+const substract = function(num1, num2){
+    result =  num1 - num2
+    return result;
+}
+const multiply = function(num1, num2){
+    result =  num1 * num2
+    return result;
+}
+const divide = function(num1, num2){
+    result =  num1 / num2
+    return result;
+}
+const power = function(num1,num2){
+    result =  num1 ** num2
+    return result;
+}
+
 
 
 const operate = function(){
@@ -43,5 +46,40 @@ const operate = function(){
         return 'Not a valid input'
     }
 }
+
+
+const display = document.querySelector(".display input")    ;
+
+const buttons = document.querySelectorAll('.buttons input[type="button"]');
+
+buttons.forEach(button => {
+    // if(parseInt(button.value) )
+    button.addEventListener('click', ()=>{
+        if(button.name == "number" ){
+            display.value += button.value ;
+        }else if(button.value == "."){
+            display.value += button.value;
+            button.disabled = true;
+        }else if(button.name == "operator"){
+            operator += button.value;
+            if(firstNumber == false){
+                firstNumber = display.value;
+                console.log(firstNumber+'is firstnumber');
+                display.value = ""
+                
+            }else if(firstNumber){
+                secondNumber = display.value
+                console.log(secondNumber+'is secondnumber');
+            } 
+        } else if(button.value = "="){
+            operate(firstNumber,secondNumber);
+            display.value = result;
+        }
+    });
+});
+
+
+
+
 
 
