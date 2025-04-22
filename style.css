@@ -61,15 +61,16 @@ input[type=button]{
     border: none;
 }
 
+
 input[value="CE"]{
     font-weight:bolder ;
 }
 input[value="CA"]{
     font-weight:bolder ;
 }
-input[value="Exp"]{
+/* input[value="Exp"]{
     font-weight:bolder ;
-}
+} */
 
 input[type=button]:hover{
     background-color: rgb(100, 145, 130);
