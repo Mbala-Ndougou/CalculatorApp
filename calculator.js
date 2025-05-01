@@ -72,15 +72,44 @@ buttons.forEach(button => {
                 display.value += button.value;
                 button.disabled = true;
             }else if(button.name == "operator"){
-                operator += button.value;
-                if(number == false){
-                    number = display.value;
-                    console.log(number+'is firstnumber');
-                    display.value = ""
-                }
+                firstNumber = display.value;
+                operator = button.value;
+                display.value = "";
+            }else if(button.name == "equals"){
+                secondNumber = display.value;
+                result = operate();
+                display.value = result;
+                firstNumber = result;
+                secondNumber = 0;
+                operator = "";
             }
         }
         );
         
     });
+    
+
+// if(number){
+//     number = 0;
+//     buttons.forEach(button => {
+
+//         button.addEventListener('click', ()=>{
+//             if(button.name == "number" ){            
+//                 display.value += button.value ;
+//             }else if(button.value == "."){
+//                 display.value += button.value;
+//                 button.disabled = true;
+//             }else if(button.name == "operator"){
+//                 operator += button.value;
+//                 if(number == false){
+//                     number = display.value;
+//                     console.log(number+'is firstnumber');
+//                     display.value = ""
+//                 }
+//             }
+//         }
+//         );
+        
+//     });
+// }
 
