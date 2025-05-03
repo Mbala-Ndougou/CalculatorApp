@@ -1,60 +1,38 @@
-let firstNumber = 0;
-let secondNumber = 0;
-let operator = "";
-let result = 0
+let firstNumber = null;
+let secondNumber = null;
+let operator = null;
+let result = null;
+let resetScreen = false;
 
 
-const add = function(num1, num2){
-    result =  num1 + num2
-    return result;
-}
-const substract = function(num1, num2){
-    result =  num1 - num2
-    return result;
-}
-const multiply = function(num1, num2){
-    result =  num1 * num2
-    return result;
-}
-const divide = function(num1, num2){
-    result =  num1 / num2
-    return result;
-}
-const power = function(num1,num2){
-    result =  num1 ** num2
-    return result;
-}
+const add = (a,b) => a+b;
+const substract = (a,b) => a-b;
+const multiply = (a,b) => a*b;
+const divide = (a,b) => a/b;
+const power = (a,b) => a**b;
+
 
 function roundToFour(num){
     return Math.round(num * 10000) / 10000;
 }
 
+
 const operate = function(){
 
-
-    return operator == "+" ? (add(parseFloat(firstNumber),parseFloat(secondNumber))):
-               operator == "-" ? substract(parseFloat(firstNumber),parseFloat(secondNumber)):
-               operator == "*" ? multiply(parseFloat(firstNumber),parseFloat(secondNumber)):
-               operator == "/" ? divide(parseFloat(firstNumber),parseFloat(secondNumber)):
-               operator == "**" ? power(parseFloat(firstNumber),parseFloat(secondNumber)):
+    if(operator == "/" && secondNumber == 0){
+        result = 'ERROR';
+        return result;
+    }else{
+        return operator == "+" ? roundToFour((add(parseFloat(firstNumber),parseFloat(secondNumber)))):
+               operator == "-" ? roundToFour(substract(parseFloat(firstNumber),parseFloat(secondNumber))):
+               operator == "*" ? roundToFour((multiply(parseFloat(firstNumber),parseFloat(secondNumber)))):
+               operator == "/" ? roundToFour(divide(parseFloat(firstNumber),parseFloat(secondNumber))):
+               operator == "**" ? roundToFour(power(parseFloat(firstNumber),parseFloat(secondNumber))):
                null;
+    }
 
-
-// I probably don't need a condition here
-
-    // if(firstNumber && operator && secondNumber){
-
-    //     return operator == "+" ? add(parseFloat(firstNumber),parseFloat(secondNumber)):
-    //            operator == "-" ? substract(parseFloat(firstNumber),parseFloat(secondNumber)):
-    //            operator == "*" ? multiply(parseFloat(firstNumber),parseFloat(secondNumber)):
-    //            operator == "/" ? divide(parseFloat(firstNumber),parseFloat(secondNumber)):
-    //            operator == "**" ? power(parseFloat(firstNumber),parseFloat(secondNumber)):
-    //            null;
     
-    // }else {
-    //     return 'Not a valid input'
-    // }
-    
+
 }
 
 
@@ -63,63 +41,79 @@ const display = document.querySelector(".display input")    ;
 const buttons = document.querySelectorAll('.buttons input[type="button"]');
 
 
-
 buttons.forEach(button => {
 
         button.addEventListener('click', ()=>{
-            if(button.name == "number" ){            
-                display.value += button.value ;
-            }else if(button.value == "."){
-                display.value += button.value;
-                button.disabled = true;
-            }else if(button.name == "operator"){
-                firstNumber = display.value;
-                operator = button.value;
-                display.value = "";
+
+            // console.log(button.value);  ||Pretty useful for debugging!
+            
+            str = display.value ;
+            if(button.name == "number" ){  
+
+                if(resetScreen == false){
+                    display.value += button.value ;
+
+                }else{
+
+                    display.value = "" ;
+                    resetScreen = false
+                    display.value = button.value;
+
+                }          
                 
+            }else if(button.value == "."){
+
+                display.value += button.value;
+
+
+            }else if(button.name == "operator"){
+
+                if(firstNumber && display.value){
+
+                    // An operation is going on!
+                    secondNumber = parseFloat(display.value);
+                    result = operate();
+                    display.value = result;
+                    firstNumber = parseFloat(result);
+            
+                }else{
+
+                    // It's the first operation
+                    firstNumber = parseFloat(display.value);
+                    resetScreen = true;
+
+                }
+
+                operator = button.value;
+                resetScreen = true;
+
             }else if(button.name == "equals"){
-                secondNumber = display.value;
-                result = roundToFour(operate());
+                
+                secondNumber = parseFloat(display.value);
+                result = operate();
                 display.value = result;
                 firstNumber = result;
-                secondNumber = 0;
                 operator = "";
+                resetScreen = true;
+                button.disabled = true;
+
             }else if(button.value == "CE"){
+
                 display.value = ""
+                resetScreen = false;
+
             }else if(button.value == "CA"){
+
                 display.value = "";
                 firstNumber = 0;
                 secondNumber = 0;
                 operator = "";
                 result = 0
+                resetScreen = false;
+
             }
-        }
-        );
+
+        });
         
     });
-    
-
-// if(number){
-//     number = 0;
-//     buttons.forEach(button => {
-
-//         button.addEventListener('click', ()=>{
-//             if(button.name == "number" ){            
-//                 display.value += button.value ;
-//             }else if(button.value == "."){
-//                 display.value += button.value;
-//                 button.disabled = true;
-//             }else if(button.name == "operator"){
-//                 operator += button.value;
-//                 if(number == false){
-//                     number = display.value;
-//                     console.log(number+'is firstnumber');
-//                     display.value = ""
-//                 }
-//             }
-//         }
-//         );
-        
-//     });
-// }
 
