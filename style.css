@@ -1,55 +1,65 @@
+
 @import url('https://fonts.cdnfonts.com/css/digital-dismay');
 
 .body{
+
     display: flex;
-    /* justify-content: center;
-    align-items: center; */
+
 }
+
 .container{
+
     display: flex;
     flex: 1 1 auto;
     height: 374px;
     width: 360px;
     border-radius: 2%;
-    /* justify-content: center; */
-    /* align-items: center; */
     background-color: rgb(25, 81, 85);
     padding: auto;
+
 }
 
 
 .buttons{
+
     display: flex;
     justify-content:space-evenly;
     width: 360px;
+
 }
 
 .display{
+
     display: flex;
     justify-content: center;
     margin-top: 15px;
     margin-bottom: 7px;
     font-family: 'Digital Dismay', sans-serif;
+
 }
 
 .new_display{
+
     border-radius: 3px;
+
 }
 
 input[type=text]{
+
     text-align: right;
     width: 340px;
     height: 50px;
     border-radius: 8px;
-    /* perspective: 1px; */
     background-color: rgb(102, 153, 136);
     font-size: 36px;
     font-family: 'Digital Dismay', sans-serif;
     border: none;
+
 }
 
 
 input[type=button]{
+
     margin: 4px 2px;
     width: 80px;
     height: 50px;
@@ -59,22 +69,31 @@ input[type=button]{
     font-size: 18px;
     color: rgb(0, 0, 0);
     border: none;
+
 }
+
 
 input[value="CE"]{
+
     font-weight:bolder ;
-}
-input[value="CA"]{
-    font-weight:bolder ;
-}
-input[value="Exp"]{
-    font-weight:bolder ;
+
 }
 
+input[value="CA"]{
+
+    font-weight:bolder ;
+
+}
+
+
 input[type=button]:hover{
-    background-color: rgb(100, 145, 130);
+
+    background-color: rgba(100, 145, 130, 0.856);
+
 }
 
 input[value="="]{
+
     width: 165px;
+    
 }
